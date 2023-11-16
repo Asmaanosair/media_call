@@ -4,8 +4,10 @@
 - composer install
 - php artisan migrate
 - npm install
-- npm run dev 
 
+## run Project
+- php artisan serve
+- npm run dev
 ## Node
 
 - node -v 14 

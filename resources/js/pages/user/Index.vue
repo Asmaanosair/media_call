@@ -2,22 +2,20 @@
 <template>
     <Nav></Nav>
 
-    <br>
-    <br>
-
     <div class="container mt-5">
         <div class="card-content">
             <div class="card ">
                 <div class="card-body">
-                    <h1 class="card-title text-danger">Users</h1>
-                    <router-link :to="{ name: 'create-user' }" class="p-2 col border btn btn-primary">Add User</router-link>
-                    <div class="alert alert-success" role="alert" v-if="success">
+                    <h1 class="card-title  text-center header-user">Users</h1>
+                    <router-link :to="{ name: 'create-user' }" class="p-2 col border header-user btn btn-sm btn-warning "> <i class="fa fa-plus"></i> Add User</router-link>
+                    <div class="alert alert-success mt-5" role="alert" v-if="success">
                         {{successMessage}}
                     </div>
                     <div class="alert alert-danger" role="alert" v-if="failed">
                         {{failedMessage}}
                     </div>
-                    <table class="table">
+                    <div class="table-responsive">
+                    <table class="table table-striped table-hover">
                         <thead>
                         <tr>
                             <th scope="col">#</th>
@@ -28,37 +26,37 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr v-for="user in users.data" :key="user.id">
-                            <td>{{ user.id }}</td>
+                        <tr v-for="(user, index) in users.data" :key="user.id">
+                            <td>{{ index+1 }}</td>
                             <td>{{ user.name }}</td>
                             <td>{{ user.email }}</td>
                             <td>{{ user.birthday }}</td>
                             <td>
-                                <div class="row gap-3">
-                                    <router-link :to="{name:'show-user',params:{id:user.id}}" class=" col border btn btn-primary"> <i class="fa fa-eye"> </i>View</router-link>
-                                    <router-link :to="{name:'edit-user',params:{id:user.id}}" class=" col border btn btn-success">Edit</router-link>
-                                    <button @click="deleteUser(user.id)" type="button" class=" col border btn btn-danger">Delete</button>
+                                <div class="row gap-3 me-2">
+                                    <router-link :to="{name:'show-user',params:{id:user.id}}" class=" col  btn btn-sm btn-outline-info"> <i class="fa fa-eye"> </i></router-link>
+                                    <router-link :to="{name:'edit-user',params:{id:user.id}}" class=" col  btn btn-sm btn-outline-success"><i class="fa fa-pencil"> </i></router-link>
+                                    <button @click="deleteUser(user.id)" type="button" class=" col  btn btn-sm btn-outline-danger"><i class="fa fa-trash"></i> </button>
                                 </div>
                             </td>
                         </tr>
                         </tbody>
                     </table>
-                    <pagination v-model="page" :records="total" :per-page="10" @paginate="paginate"/>
+                    </div>
+                    <div class="text-center d-flex justify-content-center align-items-center">
+                    <pagination  v-model="page"  :records="total" :per-page="10" @paginate="paginate"/>
+                    </div>
                 </div>
 
             </div>
         </div>
     </div>
-    <Footer></Footer>
+
 </template>
 <script>
 import axios from 'axios';
-import Footer from "../../components/Footer.vue";
-import Main from "../../components/Main.vue";
-import Header from "../../components/Header.vue";
 import Nav from "../../components/Nav.vue";
 export default {
-    components: {Nav, Header, Main, Footer},
+    components: {Nav},
     data() {
         return {
             users: [],
@@ -76,20 +74,13 @@ export default {
     },
     methods: {
         async deleteUser(id) {
-            try {
                 await axios.delete(`/api/users/${id}`);
-                this.users = this.users.filter(user => user.id !== id);
+                this.getData()
                 this.success = true
                 setTimeout(() => {
                     this.success = false
                 }, 2000)
-            } catch (error) {
-                this.failed = true
-                this.resetForm()
-                setTimeout(() => {
-                    this.failed = false
-                }, 2000)
-            }
+
         },
         paginate(page) {
             this.getData(page)
@@ -103,3 +94,6 @@ export default {
     }
 }
 </script>
+<style scoped>
+.pagination { display: flex; justify-content: center; align-items: center; }
+</style>

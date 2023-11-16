@@ -3,48 +3,48 @@
 </script>
 
 <template>
-    <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-indicators">
-            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
-            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
-        </div>
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img src="https://media.istockphoto.com/id/1168319719/photo/data-analysis-for-business-and-finance-concept.jpg?s=2048x2048&w=is&k=20&c=ClTGz5R4YGPAl_kMr3OyKiFaecq29UKD2FvqTw4NqXE=" class="d-block w-100" alt="...">
-                <div class="carousel-caption d-none d-md-block">
-                    <h5>First slide label</h5>
-                    <p>Some representative placeholder content for the first slide.</p>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <img src="https://media.istockphoto.com/id/1168319719/photo/data-analysis-for-business-and-finance-concept.jpg?s=2048x2048&w=is&k=20&c=ClTGz5R4YGPAl_kMr3OyKiFaecq29UKD2FvqTw4NqXE=" class="d-block w-100" alt="...">
-                <div class="carousel-caption d-none d-md-block">
-                    <h5>Second slide label</h5>
-                    <p>Some representative placeholder content for the second slide.</p>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <img src="https://media.istockphoto.com/id/1168319719/photo/data-analysis-for-business-and-finance-concept.jpg?s=2048x2048&w=is&k=20&c=ClTGz5R4YGPAl_kMr3OyKiFaecq29UKD2FvqTw4NqXE=" class="d-block w-100 " alt="...">
-                <div class="carousel-caption d-none d-md-block">
-                    <h5>Third slide label</h5>
-                    <p>Some representative placeholder content for the third slide.</p>
-                </div>
-            </div>
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
+
+<div class="header d-flex align-items-center justify-content-center">
+
+    <div class="text-center text-white">
+      <h1>Click Here To show Welcome Message </h1>
+        <p>Some representative placeholder content for the first slide.</p>
+        <button form="" class="btn  btn-lg rounded-pill px-5 btn-welcome text-white" @click="showAlert" >Click Here</button>
     </div>
+
+
+
+</div>
+
 </template>
 
 <script>
 export default {
-    name: 'Header'
+    name: 'Header',
+    methods: {
+        showAlert() {
+            // Use sweetalert2
+            const Toast =  this.$swal.mixin({
+                position: "center",
+                color:"#1F4391",
+                showConfirmButton: false,
+                timer: 2000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.onmouseenter =  this.$swal.stopTimer;
+                    toast.onmouseleave =  this.$swal.resumeTimer;
+                }
+            });
+            Toast.fire({
+                title: " &#127881;  Welcome   &#127881; ",
+                text: 'Thank you for visiting our website.',
+            });
+        },
+    },
 }
 </script>
+<style scoped>
+.btn-welcome{
+    background-color: #1F4391;
+}
+</style>

@@ -2,10 +2,7 @@
     <div>
         <Nav></Nav>
         <Header></Header>
-        <br>
 
-        <hr/>
-        <br>
         <Main></Main>
         <Footer></Footer>
 

@@ -8,7 +8,7 @@
         <div class="card-content">
             <div class="card ">
                 <div class="card-body">
-                    <h1 class="card-title text-danger">Edit User</h1>
+                    <h1 class="card-title text-center header-user">Edit User</h1>
         <div class="alert alert-success" role="alert" v-if="success">
             {{successMessage}}
         </div>
